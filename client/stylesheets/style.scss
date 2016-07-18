@@ -1,0 +1,18 @@
+@light-green: 4AFF07
+.hole {
+  width: 50px;
+  height: 50px;
+  float: left;
+}
+
+.garden {
+  width: 500px;
+  height: 500px;
+  background-color: @light-green;
+}
+
+
+.active {
+  background: url('../imgs/mole.svg');
+  background-size: 100% 100%;
+}
