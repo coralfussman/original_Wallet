@@ -1,3 +1,18 @@
+## Overview
+The Build Tool unit presents the challenge to create the tools and environment
+needed to start developement on a project. Tooling is highly customizable and
+determined by the team, the project, and the technologies used. Gaining
+familiarity with how they work and how to use them empowers you to control all
+aspects of your projects and to be ready to adopt the tools of any team you
+join.
+
+### Learning Goals
+- [ ] Know how to use Gulp to start a project in React
+- [ ] Know how to use Webpack in development for a React project
+
+## Getting Started
+Install dependencies: 
+`npm install`
 
 ## Build tools challenge
 You may have noticed by now that although your server is starting up on port 3000, the React app isn't quite working... This is because we haven't provided you with any working **build tools** for this project. That's right, you'll need to setup the build tools for this project yourself before you can even start. Using the build tool of your choice, write tasks to complete the following challenges:
