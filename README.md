@@ -14,8 +14,14 @@ join.
 Install dependencies: 
 `npm install`
 
+Start initial build:
+`npm run start`
+
+Navigate in your browser to [localhost:3000](http://localhost:3000/) to see your
+built application.
+
 ## Build tools challenge
-You may have noticed by now that although your server is starting up on port 3000, the React app isn't quite working... This is because we haven't provided you with any working **build tools** for this project. That's right, you'll need to setup the build tools for this project yourself before you can even start. Using the build tool of your choice, write tasks to complete the following challenges:
+Although your server is starting up on port 3000, the React app isn't quite working... This is because we haven't provided you with any working **build tools** for this project. That's right, you'll need to setup the build tools for this project yourself before you can even start. Using the build tool of your choice, write tasks to complete the following challenges:
 
 The React application at `src/index.js` needs to be **browserifed** into the file `client/bundle.js`
 
