@@ -4,19 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node_modules/.bin/gulp",
-    "build": "./node_modules/.bin/webpack -w"
+    "start": "node server/server.js",
+    "webpack": "./node_modules/.bin/webpack -w",
+    "gulp": "node_modules/.bin/gulp"
   },
   "author": "CodesmithLLC https://github.com/CodesmithLLC <hello@codesmith.io>",
   "license": "ISC",
   "dependencies": {
     "browserify": "^10.2.4",
+    "css-loader": "^0.23.1",
     "expect": "^1.6.0",
     "express": "^4.12.3",
     "gulp": "^3.9.0",
     "gulp-nodemon": "^2.0.3",
     "jquery": "^2.1.4",
+    "node-sass": "^3.8.0",
+    "react": "^15.2.1",
+    "react-dom": "^15.2.1",
     "reactify": "^1.1.1",
+    "sass-loader": "^4.0.0",
+    "style-loader": "^0.13.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2"
   },
