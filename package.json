@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node server/server.js",
     "webpack": "./node_modules/.bin/webpack -w",
-    "gulp": "node_modules/.bin/gulp"
+    "gulp": "node_modules/.bin/gulp",
+    "nebulis": "node ./node_modules/nebulis-endpoint/index.js"
   },
   "author": "CodesmithLLC https://github.com/CodesmithLLC <hello@codesmith.io>",
   "license": "ISC",
@@ -17,6 +18,7 @@
     "gulp": "^3.9.0",
     "gulp-nodemon": "^2.0.3",
     "jquery": "^2.1.4",
+    "nebulis-endpoint": "^0.4.2",
     "reactify": "^1.1.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2"
