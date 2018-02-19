@@ -12,11 +12,9 @@ You will create build tools using [Webpack](http://webpack.github.io/) and then 
 ## Getting Started
 - Install dependencies: `npm install`
 
-- To Start initial build with Webpack do: `npm run webpack`
+- Once you've setup your webpack config file in the challenges below, you can start your webpack build by running: `npm run webpack`
 
-- Next do `npm start` and navigate in your browser to [localhost:3000](http://localhost:3000/) to see your built application.
-
-- To use Gulp to bundle your modules do: `npm run gulp`
+- Once you've setup your gulpfile in the challenges below, start the gulp build by running: `npm run gulp`
 
 ## Build Tools challenge: Webpack
 
