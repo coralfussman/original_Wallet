@@ -20,7 +20,10 @@ You will create build tools using [Webpack](http://webpack.github.io/) and then 
 
 After the initial build the server starts on port 3000, but the React app doesn't render anything. There are no tests for this unit; use whether or not your app is rendering to check if your build is working correctly.
 
-[Webpack](https://webpack.github.io/docs/) is a module bundler. Even though it works very differently than task runners like Gulp we can use it to accomplish similar results. To learn how to use it in a project you will create a `webpack.config.js` file that will * bundle your React components, * bundle your sass files, * transpile all ES6 and JSX
+[Webpack](https://webpack.github.io/docs/) is a module bundler. Even though it works very differently than task runners like Gulp we can use it to accomplish similar results. To learn how to use it in a project you will create a `webpack.config.js` file that will 
+- bundle your React components
+- bundle your sass files
+- transpile all ES6 and JSX
 
 The goal is to use Webpack to build the app to look and function identically to the app built with Gulp.
 
