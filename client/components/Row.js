@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
+import React from 'react';
 import Square from './Square';
+import PropTypes from 'prop-types';
 
 const Row = (props) => {
   const { letters, handleClick, row } = props;
