@@ -33,9 +33,9 @@ The goal is to use Webpack to build the app to look and function identically to 
 
 - [ ] Set the bundle to be output as `webpack-bundle.js` in the `build/` folder. 
 
-- [ ] Explore [Loaders](https://webpack.github.io/docs/loaders.html). Loaders can transform your JSX, inline CSS, and a lot [more](https://webpack.github.io/docs/using-loaders.html)
+- [ ] Explore [Loaders](https://webpack.js.org/concepts/loaders/). Loaders can transform your JSX, inline CSS, and a lot more.
 
-- [ ] Use a loader to transpile the JSX and ES6 in the React app
+- [ ] Use a loader to transpile the JSX and ES6 in the React app.
 
 - [ ] Use a loader to transpile and bundle the SCSS.
 
