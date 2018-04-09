@@ -20,7 +20,7 @@ You will create build tools using [Webpack](http://webpack.github.io/) and then 
 
 After the initial build the server starts on port 3000, but the React app doesn't render anything. There are no tests for this unit; use whether or not your app is rendering to check if your build is working correctly.
 
-[Webpack](https://webpack.github.io/docs/) is a module bundler. Even though it works very differently than task runners like Gulp we can use it to accomplish similar results. To learn how to use it in a project you will create a `webpack.config.js` file that will 
+[Webpack](https://webpack.js.org/) is a module bundler. Even though it works very differently than task runners like Gulp we can use it to accomplish similar results. To learn how to use it in a project you will create a `webpack.config.js` file that will 
 - bundle your React components
 - bundle your sass files
 - transpile all ES6 and JSX
@@ -45,7 +45,7 @@ You can check that the app is properly bundling by opening the `index.html` in a
 
 When developing leverage the tools webpack has to boost your productivity. Webpack gives us an external module that creates a simple server with built in live reloading. It's cool!
 
-- [ ] Install [Webpack-Dev-Server](https://webpack.github.io/docs/webpack-dev-server.html) You might need to change the `webpack.config.js` file and/or your directory structure for all files to be served properly.
+- [ ] Install [Webpack-Dev-Server](https://github.com/webpack/webpack-dev-server) You might need to change the `webpack.config.js` file and/or your directory structure for all files to be served properly.
 - [ ] Once the webpack-dev-server is running, experiment with live reloading by making changes to the React app with your browser window open to [localhost:8080/build](http://localhost:3000/build).
 - [ ] For example: change the body background-color to a nice salmon (#FFA074) and the boxes color to a bright medium orchid (#BA55D3)
 
