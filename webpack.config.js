@@ -16,7 +16,9 @@ module.exports = {
         exclude: /node_modules/,
         loader: 'babel-loader',
         query: {
-          presets: ['env', 'react']
+          // for babel-loader 8.x | babel 7.x
+          presets: ['@babel/env', '@babel/react']
+          // vs. ['env', 'react'] for babel-loader 7.x | babel 6.x
         }
       },
       {
@@ -28,6 +30,9 @@ module.exports = {
     ]
   },
   devServer: {
-    publicPath: '/build'
+    publicPath: '/build',
+    proxy: {
+      '/api': 'http://localhost:3000'
+    }
   }
 };

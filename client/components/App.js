@@ -1,7 +1,7 @@
-import fetch from 'isomorphic-fetch';
 import React, { Component } from 'react';
 import Row from './Row';
 import GameList from './GameList';
+import Leaders from './Leaders';
 
 let gameStore = [];
 
@@ -45,7 +45,7 @@ class App extends Component {
     this.handleClick = this.handleClick.bind(this);
     this.state = getInitialState();
   }
-
+  
   handleClick(row, square) {
     let { turn, winner } = this.state;
     const { rows } = this.state;
@@ -93,6 +93,7 @@ class App extends Component {
         </div>
         <button id="reset" onClick={() => this.setState(getInitialState())}>Reset board</button>
         <GameList gameList={gameList} />
+        <Leaders />
       </div>
     );
   }
