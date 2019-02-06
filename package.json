@@ -7,25 +7,36 @@
     "start": "cross-env NODE_ENV=production node server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\"",
-    "gulp": "node_modules/.bin/gulp"
+    "gulp": "node_modules/.bin/gulp prod",
+    "gulp-dev": "node_modules/.bin/gulp dev"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "build",
+      "client"
+    ]
   },
   "author": "CodesmithLLC https://github.com/CodesmithLLC <hello@codesmith.io>",
   "license": "ISC",
   "dependencies": {
+    "babelify": "^10.0.0",
     "browserify": "^10.2.4",
     "css-loader": "^0.28.11",
     "expect": "^1.6.0",
     "express": "^4.12.3",
     "gulp": "^3.9.0",
+    "gulp-livereload": "^4.0.1",
     "gulp-nodemon": "^2.0.3",
+    "gulp-uglify": "^3.0.1",
     "jquery": "^2.1.4",
     "node-sass": "^4.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
-    "reactify": "^1.1.1",
     "sass-loader": "^6.0.7",
+    "sassify": "^4.0.1",
     "style-loader": "^0.20.3",
+    "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2",
     "webpack": "^4.0.1"
