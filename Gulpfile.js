@@ -7,7 +7,6 @@ const sassify = require('sassify');
 const nodemon = require('gulp-nodemon');
 const buffer = require('vinyl-buffer');
 const uglify = require('gulp-uglify');
-const livereload = require('gulp-livereload');
 const path = require('path');
 
 const sourceFile = path.join(__dirname, '/client/index.js');
