@@ -26,7 +26,6 @@
     "gulp": "^3.9.0",
     "gulp-nodemon": "^2.0.3",
     "gulp-uglify": "^3.0.1",
-    "node-sass": "^4.0.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
@@ -36,7 +35,7 @@
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^1.1.0",
     "watchify": "^3.2.2",
-    "webpack": "^4.0.1"
+    "webpack": "^4.29.3"
   },
   "devDependencies": {
     "@babel/core": "^7.2.2",
