@@ -83,33 +83,33 @@ The domain we are in is `localhost:8080` i.e. the dev server. The server API tha
 
 We thus now have the ability to make a call to our express API server in development mode! The server structure is as follows. In production, there is only one express server. This server severs the `index.html`, `bundle.js`, and JSON data API. In development, there are two servers: the webpack-dev-server and the express server. The webpack-dev-server is reponsible for the frontend html page and React bundle. The express server is merely responsible for the JSON data API. This model of one sever for production and two servers for development is common in React projects, and projects that need to be bundled with Webpack in general.
 
-Extension/suggestion: One piece of best practice is recommended. In the code for `server.js`, the lines of code that serve the `build` folder and the `index.html` file are not needed in development mode, since the `localhost:3000` express server doesn't need to serve them (isntead, the webpack-dev-server serves them). Wrap these lines of code in an `if` statement that checks whether the `NODE_ENV` variable is in production, so that they are only served in production mode because they are only needed then.
+One final piece of best practice is recommended. In the code for `server.js`, the lines of code that serve the `build` folder and the `index.html` file are not needed in development mode, since the `localhost:3000` express server doesn't need to serve them (isntead, the webpack-dev-server serves them). Wrap these lines of code in an `if` statement that checks whether the `NODE_ENV` variable is in production, so that they are only served in production mode because they are only needed then. Make sure that your project still works in both production and development mode, and that the `localhost:3000` server in development mode doesn't serve `index.html` on `/` and `/build/webpack-bundle.js` (try testing with Postman).
+
+Other extensions:
+- [ ] Implement Hot Module Replacement. [HMR](https://webpack.js.org/concepts/hot-module-replacement/) is the ability to make changes in to modules in webpack-dev-server without needing a full refresh of the browser. This improves our experience in development.
+- [ ] Implement the [Extract-Text-Webpack-Plugin](https://github.com/webpack-contrib/extract-text-webpack-plugin) in production so that styles are not inlined in bundle.js, but rather placed in a separate styles.css file that can be loaded in parallel to the JS bundle. This improves the performance of the initial page load in production if we have a large amount of CSS. A great deal of effort in frontend web performance is dedicated towards making the initial page load fast, so that users are less likely to initially leave the web page.
+- [ ] Use Webpack to minify images: jpg are usually compressed before being deployed. Download some high-res images [like this bird](https://commons.wikimedia.org/wiki/Category:Colorful_birds#/media/File:Schwarzk%C3%B6pfchen.JPG) and add to the `index.html`. Use a tool to minify/compress the jpg so that load time is quicker on the `index.html`.
 
 ## Build tools challenge: Gulp with Browserify
 
-<em>First lets uncomment the `<script>` tags in the `index.html` so that the correct bundle file is being sourced</em>.
+Utilizing the task-runner [Gulp](https://gulpjs.com/) to run the module-bundler [Browserify](http://browserify.org/) is an older but still relevant option. You might still see Gulp with Browserify at your future workplace, so learning how to setup a `Gulpfile.js` that runs Browserify (which does the actual module bundling) is an important skill.
 
-The React application at `client/index.js` needs to be <b>browserifed</b> into the file `client/bundle.js`
+Comment/uncomment the correct script tags in `index.html` to begin this challenge so that the bundle file comes from Browserify and not Webpack. We will use Gulp with Browserify to create a production build.
 
-- [ ] Browserify must use the `babelify` transform with the following presets:
-  - `es2015`: allows transformation of ES6 code to ES5 so that all modern browsers can run the code
-  - `react`: allows transformation of </b>jsx</b> syntax to normal JavaScript so that browsers can understand it
-- [ ] Write a task that performs a one-time build of the bundle
-- [ ] Write a task that uses `watchify` to watch the `src/index.js` file for changes and rebuild as necessary
-- [ ] Extension - Modify your build task so that it <b>minifies</b> that built JavaScript
-- [ ] Extension - Modify your build task so that it includes <b>source maps</b> with the minified code
+Make a Gulp task called `prod`. This task will get run by Gulp in our npm script for `npm run gulp-prod`, which runs the Gulp task named `prod`.
 
-The styles are written in [SCSS](http://sass-lang.com/guide), a pre-processed CSS extension that gives powerful features to CSS. They'll need to be compiled to CSS before the styles will work.
+The steps necessary within the Gulp task called `prod` are as follows (research documentation and/or Stack Overflow for precise syntax). You will be responsible for installing the necessary node_modules along the way.
 
-- [ ] Write a task that runs a one-time compile of the `scss/application.scss` file into `client/stylesheets/styles.css`
-- [ ] Write a task that watches `scss/application.scss` for changes and recompiles to `client/styles.css` whenever the styles are changed
-- [ ] Extension - Modify your build task so that it <b>minifies</b> the built CSS
-- [ ] Extension - Modify your build task so that it includes <b>source maps</b> with the minified CSS
+1. Run `browserify` on the `sourceFile` (the `sourceFile` is essentially our Webpack entry point).
+2. Run a transform with `babelify`, using the same presets as with Webpack (i.e. `@babel/preset-env` and `@babel/preset-react`) in order for the browser to read our React JS files.
+3. Run a transform with `sassify` in order to bundle our SCSS files, and to convert the SCSS into regular CSS.
+4. Perform the bundle.
+5. Pipe into a `vinyl-source-stream` with the `destFile` as an argument.
+6. Pipe the stream into the `destFolder`.
 
-### Extensions
+Try running `npm run gulp-prod` to produce the browserify bundle, then run `npm start` to see if it worked.
 
-Go further into build tools with some of these extensions for Gulp and/or Webpack:
+Notice that our code is not minified/uglified. Check this by looking at `browserify-bundle.js` within the `build` folder or by using the dev tools in the browser. Utilize `vinyl-buffer` and `gulp-uglify` to compress our code, so that our production build is optimized.
 
-- [ ] Incorporate Webpack's [HMR plugin](https://webpack.github.io/docs/hot-module-replacement.html)
-- [ ] Install eslint and create a Gulp task to lint all JavaScript files
-- [ ] Use either tool to minify images: jpg are usually compressed before being deployed. Download some high-res images [like this bird](https://commons.wikimedia.org/wiki/Category:Colorful_birds#/media/File:Schwarzk%C3%B6pfchen.JPG) and add to the `index.html`. Use a tool to minify/compress the jpg so that load time is quicker on the `index.html`.
+Extension:
+Set up a development environment for Gulp with Browserify that can be ran with `npm run gulp-dev`. Utilize `watchify` on the `browserify` instance. You'll have to set up a Gulp task called `dev` (which matches the task name that Gulp calls in our script for `npm run gulp-dev`). Define an event handler on the watchified browserify instance so that on `update` that the bundler re-runs the Babel/Sass transpilations and pipes the results to the desination folder with the correct destination file name.

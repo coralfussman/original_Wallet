@@ -7,7 +7,7 @@
     "start": "cross-env NODE_ENV=production node server/server.js",
     "build": "cross-env NODE_ENV=production webpack",
     "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\"",
-    "gulp": "node_modules/.bin/gulp prod",
+    "gulp-prod": "node_modules/.bin/gulp prod",
     "gulp-dev": "node_modules/.bin/gulp dev"
   },
   "nodemonConfig": {

@@ -10,7 +10,7 @@ const uglify = require('gulp-uglify');
 const path = require('path');
 
 const sourceFile = path.join(__dirname, '/client/index.js');
-const destFile = 'bundle.js';
+const destFile = 'browserify-bundle.js';
 const destFolder = path.join(__dirname, 'build');
 
 gulp.task('browserify-prod', function () {
