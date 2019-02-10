@@ -15,7 +15,7 @@ app.get('/api/leaders', (req, res) => {
 
 if (process.env.NODE_ENV === 'production') {
   app.use('/build', express.static(path.join(__dirname, '../build')));
-  app.get('*', (req, res) => {
+  app.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '../index.html'));
   });
 }
