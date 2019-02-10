@@ -104,7 +104,7 @@ The steps necessary within the Gulp task called `prod` are as follows (research 
 2. Run a transform with `babelify`, using the same presets as with Webpack (i.e. `@babel/preset-env` and `@babel/preset-react`) in order for the browser to read our React JS files.
 3. Run a transform with `sassify` in order to bundle our SCSS files, and to convert the SCSS into regular CSS.
 4. Perform the bundle.
-5. Pipe into a `vinyl-source-stream` with the `destFile` as an argument.
+5. Pipe into a `vinyl-source-stream` with the `destFile` name as an argument.
 6. Pipe the stream into the `destFolder`.
 
 Try running `npm run gulp-prod` to produce the browserify bundle, then run `npm start` to see if it worked.
@@ -112,4 +112,5 @@ Try running `npm run gulp-prod` to produce the browserify bundle, then run `npm 
 Notice that our code is not minified/uglified. Check this by looking at `browserify-bundle.js` within the `build` folder or by using the dev tools in the browser. Utilize `vinyl-buffer` and `gulp-uglify` to compress our code, so that our production build is optimized.
 
 Extension:
-Set up a development environment for Gulp with Browserify that can be ran with `npm run gulp-dev`. Utilize `watchify` on the `browserify` instance. You'll have to set up a Gulp task called `dev` (which matches the task name that Gulp calls in our script for `npm run gulp-dev`). Define an event handler on the watchified browserify instance so that on `update` that the bundler re-runs the Babel/Sass transpilations and pipes the results to the desination folder with the correct destination file name.
+Set up a development environment for Gulp with Browserify that can be ran with `npm run gulp-dev`. Utilize `watchify` on the `browserify` instance. You'll have to set up a Gulp task called `dev` (which matches the task name that Gulp calls in our script for `npm run gulp-dev`). Define an event handler on the watchified browserify instance so that on `update` that the bundler re-runs the Babel/Sass transpilations and pipes the results to the desination folder with the correct destination file name. Make sure that in this task that we don't perform uglification. Note that this development environment is not taking advantage of live-reloading (because we are not utilizing a dev server with a websocket under the hood) so we have to refresh the page to see changes.
+
