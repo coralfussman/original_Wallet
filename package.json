@@ -20,14 +20,11 @@
   "license": "ISC",
   "dependencies": {
     "browserify": "^10.2.4",
-    "css-loader": "^0.28.11",
     "express": "^4.12.3",
     "gulp": "^3.9.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
-    "sass-loader": "^6.0.7",
-    "style-loader": "^0.20.3",
     "webpack": "^4.29.3"
   },
   "devDependencies": {
