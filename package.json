@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "cross-env NODE_ENV=production node server/server.js",
-    "build": "cross-env NODE_ENV=production webpack",
-    "dev": "cross-env NODE_ENV=development concurrently \"nodemon server/server.js\" \"webpack-dev-server --open\"",
+    "start": "node server/server.js",
+    "build": "webpack",
+    "dev": "webpack-dev-server --open",
     "gulp-prod": "node_modules/.bin/gulp prod",
     "gulp-dev": "node_modules/.bin/gulp dev"
   },
@@ -19,34 +19,22 @@
   "author": "CodesmithLLC https://github.com/CodesmithLLC <hello@codesmith.io>",
   "license": "ISC",
   "dependencies": {
-    "babelify": "^10.0.0",
     "browserify": "^10.2.4",
     "css-loader": "^0.28.11",
     "express": "^4.12.3",
     "gulp": "^3.9.0",
-    "gulp-nodemon": "^2.0.3",
-    "gulp-uglify": "^3.0.1",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
     "sass-loader": "^6.0.7",
-    "sassify": "^4.0.1",
     "style-loader": "^0.20.3",
-    "vinyl-buffer": "^1.0.1",
-    "vinyl-source-stream": "^1.1.0",
-    "watchify": "^3.2.2",
     "webpack": "^4.29.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.2.2",
-    "@babel/preset-env": "^7.3.1",
-    "@babel/preset-react": "^7.0.0",
-    "babel-loader": "^8.0.5",
     "concurrently": "^4.1.0",
     "cross-env": "^5.2.0",
     "isomorphic-fetch": "^2.2.1",
     "nodemon": "^1.18.9",
-    "webpack-cli": "^3.2.3",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-cli": "^3.2.3"
   }
 }
