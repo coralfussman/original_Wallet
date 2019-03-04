@@ -1,16 +1,18 @@
-var gulp = require('gulp');
-var source = require('vinyl-source-stream');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var reactify = require('reactify');
-var nodemon = require('gulp-nodemon');
+const gulp = require('gulp');
+const source = require('vinyl-source-stream');
+const browserify = require('browserify');
+const watchify = require('watchify');
+const babelify = require('babelify');
+const sassify = require('sassify');
+const nodemon = require('gulp-nodemon');
+const buffer = require('vinyl-buffer');
+const uglify = require('gulp-uglify');
+const path = require('path');
 
-gulp.task('serve', serve);
+const sourceFile = path.join(__dirname, '/client/index.js');
+const destFile = 'browserify-bundle.js';
+const destFolder = path.join(__dirname, 'build');
 
-// simple gulp task to start the server
-function serve() {
-  nodemon({script: 'server/server.js'});
-}
-
-// gulps default task is to call the serve task
-gulp.task('default', ['serve']);
+gulp.task('prod', function () {
+  
+});
