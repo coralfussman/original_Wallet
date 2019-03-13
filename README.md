@@ -2,7 +2,7 @@
 
 The Build Tool unit presents the challenge to create the tools and environment needed to work on a modern frontend project, especially a React project. Tooling is highly customizable and determined by the team, the project, and the technologies used. Gaining familiarity with how they work and how to use them empowers you to control all aspects of your projects and to be ready to adopt the tools of any team you join.
 
-You will build tools using the [Webpack](https://webpack.js.org/) module bundler with [Babel](https://babeljs.io/) transpilation to bundle and transpile an existing React app. We will first be utilizing Webpack to create a production build that could be served an a real website. Then, you will utilize [Webpack-dev-server](https://webpack.js.org/configuration/dev-server/) for fast development with live-reloading. Finally, you will utilize [Gulp](https://gulpjs.com/) with [Browserify](http://browserify.org/), an older but still relevant technology for module-bundling (Browserify) and task-running (Gulp).
+You will build tools using the [Webpack](https://webpack.js.org/) module bundler with [Babel](https://babeljs.io/) transpilation to bundle and transpile an existing React app. We will first be utilizing Webpack to create a production build that could be served on a real website. Then, you will utilize [Webpack-dev-server](https://webpack.js.org/configuration/dev-server/) for fast development with live-reloading. Finally, you will utilize [Gulp](https://gulpjs.com/) with [Browserify](http://browserify.org/), an older but still relevant technology for module-bundling (Browserify) and task-running (Gulp).
 
 ### Learning Goals
 
