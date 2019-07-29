@@ -42,7 +42,7 @@ Run `npm start` now and go to `localhost:3000`. This server comes from the `serv
 
 - [ ] Set the `client/index.js` file as the entry. This is the initial file that Webpack parses through to make a dependency graph of all file assets to be bundled together, including your entire frontend React code, imported node modules, imported CSS and image files, etc.
 
-- [ ] Set the bundle to be output as filename `bundle.js` in the `build/` folder. The Webpack build process, after it runs, will make a file in the `build` folder called `bundle.js`.
+- [ ] Set the bundle to be output as filename `bundle.js` in the `build` folder. The Webpack build process, after it runs, will make a file in the `build` folder called `bundle.js`.
 
 - [ ] Set the mode to be `production`. This means that we are creating a minified and uglified production bundle, which compresses the codebase so that a client visiting our website can get the code delivered faster.
 
