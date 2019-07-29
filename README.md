@@ -90,7 +90,9 @@ Other extensions:
 - [ ] Implement Hot Module Replacement. [HMR](https://webpack.js.org/concepts/hot-module-replacement/) is the ability to make changes in to modules in webpack-dev-server without needing a full refresh of the browser. This improves our experience in development.
 - [ ] Use Webpack to minify images: jpg are usually compressed before being deployed. Download some high-res images [like this bird](https://commons.wikimedia.org/wiki/Category:Colorful_birds#/media/File:Schwarzk%C3%B6pfchen.JPG) and add to the `index.html`. Use a tool to minify/compress the jpg so that load time is quicker on the `index.html`.
 
-## Build tools challenge: Gulp with Browserify
+## Extension: Build tools challenge: Gulp with Browserify
+
+The main goal of this module is to learn Webpack. The Gulp material here can be considered as an extension.
 
 Utilizing the task-runner [Gulp](https://gulpjs.com/) to run the module-bundler [Browserify](http://browserify.org/) is an older but still relevant option. You might still see Gulp with Browserify at your future workplace, so learning how to setup a `Gulpfile.js` that runs Browserify (which does the actual module bundling) is an important skill.
 
