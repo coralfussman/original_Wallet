@@ -12,7 +12,7 @@ const leaderList = [
 ];
 
 app.get('/api/leaders', (req, res) => {
-  res.send(leaderList);
+  return res.status(200).send(leaderList);
 });
 */
 
@@ -20,7 +20,7 @@ app.get('/api/leaders', (req, res) => {
 app.use('/build', express.static(path.join(__dirname, '../build')));
 // serve index.html on the route '/'
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../index.html'));
+  return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
 app.listen(3000); //listens on port 3000 -> http://localhost:3000/
