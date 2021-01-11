@@ -25,7 +25,7 @@
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.3.1",
-    "webpack": "^4.29.3"
+    "webpack": "^4.45.0"
   },
   "devDependencies": {
     "concurrently": "^4.1.0",
