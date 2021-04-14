@@ -12,6 +12,7 @@ You will build tools using the [Webpack](https://webpack.js.org/) module bundler
 - [ ] Learn how to use Gulp with Browserify to start a project in React as an alternative tool
 
 ## Getting Started
+
 - Install dependencies: `npm install`. We will install more dependencies for Webpack and Babel along the way.
 
 - Once you've setup your Webpack config file (`webpack.config.js`) in the challenges below, you can create your Webpack production build by running: `npm run build`. You can then run the application server with `npm start` and view the React application on `localhost:3000`
@@ -29,7 +30,7 @@ After running `npm start` the server starts on port 3000, but the React app does
 
 Webpack can gracefully combine and optimize projects with both type of JS modules and serve it in a single `bundle.js` file. This is how we avoid the script tag "hell" mentioned in the lecture. Webpack also has the ability to include within the `bundle.js` file other assets like CSS styles and images, allowing for a modular code experience.
 
-Webpack also achieves the goal of _transpilation_, which is the processing of custom file types that go beyond traditional JS or CSS. This is done using _loaders_. In particular, the loaders that particularly deal with transpiling JS code are known as Babel loaders. We will create a `webpack.config.js` file that will 
+Webpack also achieves the goal of _transpilation_, which is the processing of custom file types that go beyond traditional JS or CSS. This is done using _loaders_. In particular, the loaders that particularly deal with transpiling JS code are known as Babel loaders. We will create a `webpack.config.js` file that will
 
 - bundle your JS and CSS files together into a `bundle.js` file.
 - transpile React [JSX](https://reactjs.org/docs/introducing-jsx.html) syntax (the ability to write HTML-looking code within React code) into JS code [understandable](https://reactjs.org/docs/react-without-jsx.html) by the browser.
@@ -63,7 +64,7 @@ The process outlined above for creating a production build is good for serving t
 Install [Webpack-dev-server](https://github.com/webpack/webpack-dev-server) and save in devDependencies. Running `webpack-dev-server` creates a simple development server on `localhost:8080` with built in live reloading. Our dev server delivers both `index.html` and Webpack bundle content. Efficient rebuilding is achieved because Webpack bundle content is stored in _memory_ rather than the _file system_. Webpack-dev-server _watches_ the files in our React codebase for changes. Webpack-dev-server maintains a _websocket_ connection to the browser so that notification of changes in our React codebase gets immediately sent to the client on our browser through a websocket message. No need to run the `localhost:3000` express server at all (at least for the time being) because everything is provided by the dev server.
 
 - [ ] Change the mode in your `webpack.config.js` to development (if you haven't already). Also delete the `bundle.js` file in the build folder (so that, for debugging purposes, you know for sure that any content you serve is from `webpack-dev-server`).
-- [ ] Run `npm run dev` (don't run `npm start`). The web page automatically opens because we're running `webpack-dev-server --open`. We should get a 404 error for the route `/build/bundle.js`.
+- [ ] Run `npm run dev` (don't run `npm start`). The web page automatically opens because we're running `webpack serve --open`. We should get a 404 error for the route `/build/bundle.js`.
 - [ ] How can we get rid of this error? Hint: look up the `devServer` [setting](https://webpack.js.org/configuration/dev-server/) for `webpack.config.js` and see if we can modify the `publicPath` on which Webpack output is served.
 - [ ] We should now have a working app served by webpack-dev-server! Notice that the `build` folder in our filesystem is completely empty: this is because webpack-dev-server keeps the bundle in memory rather than on disk.
 - [ ] While the app is running on `localhost:8080`, go to `GameList.js`, change `<h3>Previous matches</h3>` to `<h3>Past matches</h3>`, and save the file. The browser refreshes and the change shows up immediately! This is known as live-reloading, and demonstrates the power of webpack-dev-server. Also go to `_game.scss` and change the style of the body background from light blue to (e.g.) red, and notice how the browser immediately refreshes upon save, showing the background color change.
@@ -86,6 +87,7 @@ We thus now have the ability to make a call to our express API server in develop
 One final piece of best practice is recommended. In the code for `server.js`, the lines of code that serve the `build` folder and the `index.html` file are not needed in development mode, since the `localhost:3000` express server doesn't need to serve them (instead, the webpack-dev-server serves them). Wrap these lines of code in an `if` statement that checks whether the `NODE_ENV` variable is in production, so that they are only served in production mode because they are only needed then. Make sure that your project still works in both production and development mode, and that the `localhost:3000` server in development mode doesn't serve `index.html` on `/` and `/build/bundle.js` (try testing with Postman).
 
 Other extensions:
+
 - [ ] Implement the [Mini-CSS-Extract-Plugin](https://github.com/webpack-contrib/mini-css-extract-plugin) in production so that styles are not inlined in bundle.js, but rather placed in a separate styles.css file that can be loaded in parallel to the JS bundle. This improves the performance of the initial page load in production if we have a large amount of CSS. A great deal of effort in frontend web performance is dedicated towards making the initial page load fast, so that users are less likely to initially leave the web page.
 - [ ] Implement Hot Module Replacement. [HMR](https://webpack.js.org/concepts/hot-module-replacement/) is the ability to make changes in to modules in webpack-dev-server without needing a full refresh of the browser. This improves our experience in development.
 - [ ] Use Webpack to minify images: jpg are usually compressed before being deployed. Download some high-res images [like this bird](https://commons.wikimedia.org/wiki/Category:Colorful_birds#/media/File:Schwarzk%C3%B6pfchen.JPG) and add to the `index.html`. Use a tool to minify/compress the jpg so that load time is quicker on the `index.html`.
@@ -115,4 +117,3 @@ Notice that our code is not minified/uglified. Check this by looking at `browser
 
 Extension:
 Set up a development environment for Gulp with Browserify that can be ran with `npm run gulp-dev`. Utilize `watchify` on the `browserify` instance. You'll have to set up a Gulp task called `dev` (which matches the task name that Gulp calls in our script for `npm run gulp-dev`). Define an event handler on the watchified browserify instance so that on `update` that the bundler re-runs the Babel/Sass transpilations and pipes the results to the destination folder with the correct destination file name. Make sure that in this task that we don't perform uglification. Note that this development environment is not taking advantage of live-reloading (because we are not utilizing a dev server with a websocket under the hood) so we have to refresh the page to see changes.
-

@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node server/server.js",
     "build": "webpack",
-    "dev": "webpack-dev-server --open",
+    "dev": "webpack serve --open",
     "gulp-prod": "node_modules/.bin/gulp prod",
     "gulp-dev": "node_modules/.bin/gulp dev"
   },
@@ -19,19 +19,19 @@
   "author": "CodesmithLLC https://github.com/CodesmithLLC <hello@codesmith.io>",
   "license": "ISC",
   "dependencies": {
-    "browserify": "^10.2.4",
+    "browserify": "^17.0.0",
     "express": "^4.12.3",
-    "gulp": "^3.9.0",
+    "gulp": "^4.0.2",
     "prop-types": "^15.6.1",
-    "react": "^16.2.0",
-    "react-dom": "^16.3.1",
-    "webpack": "^4.45.0"
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "webpack": "^5.32.0"
   },
   "devDependencies": {
-    "concurrently": "^4.1.0",
-    "cross-env": "^5.2.0",
-    "isomorphic-fetch": "^2.2.1",
-    "nodemon": "^1.18.9",
-    "webpack-cli": "^3.2.3"
+    "concurrently": "^6.0.2",
+    "cross-env": "^7.0.3",
+    "isomorphic-fetch": "^3.0.0",
+    "nodemon": "^2.0.7",
+    "webpack-cli": "^4.6.0"
   }
 }
