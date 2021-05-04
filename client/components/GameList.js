@@ -8,7 +8,7 @@ const GameList = (props) => {
   ));
   return (
     <div id="gameList">
-      <h3>Previous matches</h3>
+      <h3>Past matches</h3>
       <ul>
         {listElements}
       </ul>

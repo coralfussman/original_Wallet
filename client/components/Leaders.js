@@ -11,11 +11,11 @@ class Leaders extends Component {
   
   componentDidMount() {
     // uncomment the below for proxy challenge
-    /*
+    
     fetch('/api/leaders')
       .then(response => response.json())
       .then(leaders => this.setState({leaders}));
-    */
+    
   }
   
   render() {
