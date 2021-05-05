@@ -1,0 +1,207 @@
+import React, { Component } from 'react'
+//import {WidgetDash, NewsContainer} from './DashboardComponents';
+
+//import UserCategories from './UserCategories';
+
+//import {weather, quotes, currency, calendar} from './DashboardComponents'
+import {Button, SVGPanel, MediaPanel, InvertedFont, ThemePanel, SVG, SignOut} from './Themes';
+
+// import weather from '../weather.svg';
+// import currency from '../currency.svg';
+// import quote from '../quote.svg';
+// import calendar from '../calendar.svg';
+// import unit from '../unit.svg';
+// import zodiac from '../zodiac.svg';
+// import clock from '../clock.svg';
+// import game from '../game.svg';
+
+// import facebook from '../facebook.svg';
+// import linkedin from '../linkedin.svg';
+// import medium from '../medium.svg';
+// import twitter from '../twitter.svg';
+
+
+class Wallet extends Component {
+
+    state = {}
+     images = 1
+     
+
+       
+   
+    
+        onClick = (clickResult) => {
+            console.log( clickResult)
+            
+            const { addedIndex, payload } = clickResult;
+            
+            //console.log( this.props.walletID)
+            //console.log( payload.id)
+   
+
+
+            fetch("http://localhost:4000/user_categories", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                  "Authorization": localStorage.token
+                },
+                body: JSON.stringify({
+        
+                  widget_id: payload.id,
+                  dashboard_id: this.props.dashboardID
+                 
+        
+                })
+              })
+              .then(r => r.json())
+              .then((newUserCategory) => {
+                  console.log(newUserCategory)
+
+                 this.props.addOneCategory(newUserCategory);
+              })
+             
+            
+            //added index matches widget dash location (send to add widget in state to pass props up)
+            //...... in app........
+            // setstate of userWidgets
+            //go to docs e.addedIndex is prob location dropped on/ e.payload is what you're dropping 
+                    
+          }
+        
+        //   handleThemeChange = (name, id) => {
+        //     console.log(id)
+        //       console.log(this.props.themeName)
+        //       console.log(name)
+        //     //   let name = e.target.value
+
+        //     fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+        //         method: "PATCH",
+        //         headers: {
+        //         "Authorization": localStorage.token,
+        //         "content-type": "application/json"
+        //         },
+        //         body: JSON.stringify({
+        //         new_id: id
+                
+        //         })
+        //     })
+        //     .then(r => r.json())
+        //     .then((updatedTheme) => {
+        //         this.props.updateTheme(updatedTheme)
+        //     })
+        //     }
+          
+       
+    render() {
+    
+        //console.log(this.props.user)
+        // debugger
+        const themeDots = this.themeNames.map(theme => {
+            
+             return <button className={theme.name} key={theme} value={theme} theme={theme} token={this.props.token} onClick={ ()=> this.handleThemeChange( theme.name, theme.id)} ></button>
+            })
+           
+           const { images } = this.state;
+           
+
+           const currentHour = new Date().getHours();
+
+           const greetingMessage =
+           currentHour >= 4 && currentHour < 12 ? // after 4:00AM and before 12:00PM
+           'Good Morning' :
+           currentHour >= 12 && currentHour <= 17 ? // after 12:00PM and before 6:00pm
+           'Good Afternoon' :
+           currentHour > 17 || currentHour < 4 ? // after 5:59pm or before 4:00AM (to accommodate night owls)
+           'Good Evening' : // if for some reason the calculation didn't work
+           'Welcome'
+      
+          
+        return (
+        
+            <div className="dashContainer">
+                {/* column 1 */}
+                <div className="columnContainer">
+                    <InvertedFont>
+                        <h3> {greetingMessage} {this.props.user.name} </h3>
+                    </InvertedFont>
+                    <ThemePanel>
+                            <p>Theme:</p>
+                            {themeDots}
+
+                        </ThemePanel>
+                        <InvertedFont/>
+                        <SVGPanel className="iconPanel">
+                            <h3 className="titleWidgPanel">Customize Categories by adding them to your Wallet</h3>
+                            
+                            {/* <Svgs/> */} 
+                            <Container
+                            groupName="1"
+                            behaviour="copy"
+                            getChildPayload={index => images[index]}
+                            >
+                            {images.map(icon => (
+                            
+                            <SVG src={icon.img} className="widgetIcons" id={icon.id} name={icon.name} alt={icon.name}></SVG>
+                            
+                            ))}
+                            </Container>
+
+                        </SVGPanel>
+
+                </div>
+
+
+
+                {/* column 2 */}
+                <div className="columnCenterContainer">
+                <Container
+                    dropPlaceholder={false}
+                    shouldAnimateDrop={() => false}
+                    groupName="1"
+                    behaviour="drop-zone"
+                    onClick={this.onClick}
+                    >
+                        <WidgetDash  widgetDash={this.props.widgetDash}  userWidgets={this.props.userWidgets} addOneWidget={this.props.addOneWidget} deleteWidget={this.props.deleteWidget} token={this.props.token}/>
+                   
+                </Container>    
+                
+        
+       
+                    
+                        <NewsContainer searchTerm={this.props.searchTerm} changeSearchTerm={this.props.changeSearchTerm}  themes={this.props.themes} results={this.props.results}/>
+                    
+                </div>
+
+
+
+                {/* column 3 */}
+                <div className="columnRightContainer">
+                    <SignOut onClick={this.props.clearUser}>Sign Out</SignOut>
+                    <MediaPanel className="iconMediaPanel">
+                        <h3>Social</h3>
+                        <a href="https://www.facebook.com/" >
+                        <img src={facebook} className="widgetMIcons" alt="facebook" />
+                        </a>
+
+                        <a href="https://twitter.com/CoralFussman" >
+                        <img src={twitter} className="widgetMIcons" alt="twitter" />
+                        </a>
+                        <a href="https://www.linkedin.com/in/coral-fussman-21721538/" >
+                        <img src={linkedin} className="widgetMIcons" alt="linkedin" />
+                        </a>
+                        <a href="https://medium.com/@coralfussman" >
+                        <img src={medium} className="widgetMIcons" alt="medium" />
+                        </a>
+
+                    </MediaPanel>
+                </div>
+
+
+                
+            </div>
+    
+        )
+    }
+}
+export default Wallet;
