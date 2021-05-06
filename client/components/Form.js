@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import github from './github.svg';
 class Form extends Component {
 
   state = {
@@ -13,15 +13,15 @@ class Form extends Component {
     this.props.handleSubmit(this.state)
   }
 
-//     handleSubmit = (e) => {
-//       e.preventDefault()
+    handleSubmit = (e) => {
+      e.preventDefault()
     
-//     console.log("made it to handle sub")
-//     const user = this.props.users.find(user => user.username === this.state.username)
-//     console.log(user, "user & handle sub")
-//     return this.props.currentUser(user)
+    console.log("made it to handle sub")
+    const user = this.props.users.find(user => user.username === this.state.username)
+    console.log(user, "user & handle sub")
+    return this.props.currentUser(user)
     
-// }
+}
 
   handleChange = (e) => {
     let {name, value} = e.target
@@ -49,7 +49,9 @@ class Form extends Component {
             <input className="input" type="password" autoComplete="off" name="password" value={password} onChange={this.handleChange}/><br/>
           </div>
             <input className="submitButton" type="submit" value="Submit"/>
-        
+            <h3>Or Authenticate with </h3>
+            <img src={github} className="" alt="github"  />
+            <button onClick={this.props.handleLoginGithub}>GITHUB</button>
         </div>
       </form>
     );

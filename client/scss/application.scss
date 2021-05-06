@@ -157,7 +157,7 @@ label {
 }
 /* rowContainer  */
 
-.widgeDash {
+.categories {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -171,7 +171,19 @@ label {
 
 /* row 2 */
 
-.newsContainer {
+.allCatContainer {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+
+  /* justify-content: space-evenly; */
+  width: 100vw;
+  max-width: 1033px;
+  height: 70vh;
+  overflow: scroll;
+  float: center;
+}
+.userCatContainer {
   margin-top: 20px;
   display: flex;
   flex-direction: row;
@@ -188,7 +200,7 @@ label {
 
 /* news */
 
-.articleImg {
+.categorySVG {
   height: 140px;
   width: 210px;
   margin: 30px;

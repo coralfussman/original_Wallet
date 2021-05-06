@@ -10,7 +10,7 @@ import AllCategories from './AllCategories'
 import Wallet from '../WalletComponents/Wallet'
 import GlobalStyle from '../WalletComponents/GlobalStyle'
 
-//import logo from './logo.svg';
+////import logo from './logo.svg';
 
 import  {themes} from "../WalletComponents/Themes";
 
@@ -26,12 +26,22 @@ import {withRouter} from 'react-router-dom'
       //results is for nyt
       user: {
         id: 0,
-        name: "",
-        username: "",
-        wallet: [],
+        name: "Coral",
+        username: "coralfuss",
+        user_categories: [],
        
         
       },
+      categories: [
+        {cat_name: "Living & Utilities", target_budget: "1500", current_bal: "500", expense_state: "fixed"}, 
+        {cat_name: "Reoccuring", target_budget: "500", current_bal: "500", expense_state: "fixed"},
+        {cat_name: "Savings", target_budget: "500", current_bal: "0", expense_state: "flux"},  
+        {cat_name: "Shopping", target_budget: "500", current_bal: "0", expense_state: "flux"},
+        {cat_name: "Social", target_budget: "500", current_bal: "0", expense_state: "flux"},
+        {cat_name: "Travel", target_budget: "500", current_bal: "0", expense_state: "flux"}, 
+        {cat_name: "Food", target_budget: "500", current_bal: "0", expense_state: "flux"},
+        {cat_name: "Unexpected", target_budget: "500", current_bal: "0", expense_state: "flux"},       
+       ],
       theme: "light",
       token: "",
       searchTerm: "",
@@ -42,9 +52,18 @@ import {withRouter} from 'react-router-dom'
 //---------------FETCH REQUESTS----------------//
   
     componentDidMount(){
+
+      // fetch("http://localhost:3000/login",{
+      //     headers: {
+      //       "Authorization": localStorage.token
+      //     }
+      //   })
+      //   .then(r => r.json())
+      //   .then(this.handleResponse)
+  
       // if(localStorage.token){
 
-      //   fetch("http://localhost:4000/users/stay_logged_in",{
+      //   fetch("http://localhost:3000/users/stay_logged_in",{
       //     headers: {
       //       "Authorization": localStorage.token
       //     }
@@ -73,7 +92,7 @@ import {withRouter} from 'react-router-dom'
       
   
       // handleLoginSubmit = (userInfo) => {
-      //   fetch("http://localhost:4000/login", {
+      //   fetch("http://localhost:3000/login", {
       //     method: "POST",
       //     headers: {
       //       "content-type": "application/json"
@@ -83,6 +102,21 @@ import {withRouter} from 'react-router-dom'
       //     .then(r => r.json())
       //     .then(this.handleResponse)
       // }
+
+
+      handleLoginGithub = (userInfo) => {
+        fetch("http://localhost:3000/login/github", {
+          
+          headers: {
+            "content-type": "application/json"
+
+          },
+          body: JSON.stringify(userInfo)
+        })
+          .then(r => r.json())
+          .then(this.handleResponse)
+      }
+  
   
   
   
@@ -101,50 +135,50 @@ import {withRouter} from 'react-router-dom'
 
 
   
-      // handleResponse = (resp) => {
+      handleResponse = (resp) => {
   
-      //   if(resp.user){
-      //     localStorage.token = resp.token
-      //     this.setState(resp, () => {
-      //       this.props.history.push("/dashboard")
-      //     })
-      //   } else {
-      //     alert(resp.error)
-      //   }
+        if(resp.user){
+          localStorage.token = resp.token
+          this.setState(resp, () => {
+            this.props.history.push("/wallet")
+          })
+        } else {
+          alert(resp.error)
+        }
   
-      // }
+      }
 
 
     //----------------SETTING STATE FUNCTIONS-----------------//
    
     // ---------User functions
 
-    clearUser = (e) => {
-      // window.location.reload(false)
-      this.setState({
+    // clearUser = (e) => {
+    //   // window.location.reload(false)
+    //   this.setState({
         
        
           
-          user: {
-            id: 0,
-            name: "",
-            username: "",
-            wallet: [],
+    //       user: {
+    //         id: 0,
+    //         name: "",
+    //         username: "",
+    //         user_categories: [],
            
             
-          }
+    //       }
       
-      })
-      this.props.history.push("/")
-    }
+    //   })
+    //   this.props.history.push("/")
+    // }
 
 
     //-------category functions below
 
-    addOneCategory = (newlyCreatedWidgetDash) => {
-      // console.log(newlyCreatedWidgetDash)
-      // let copyOfWidgets = [...this.state.user.dashboards[0].widgets, newlyCreatedWidgetDash]
-      // let copyOfWidgetDash = this.state.user.dashboards[0].widget_dashes
+    addOneCategory = (newlyCreatedUserCat) => {
+      // console.log(newlyCreatedUserCat)
+      // let copyOfCategory = [...this.state.user.dashboards[0].widgets, newlyCreatedWidgetDash]
+      // let copyOfUserCat = this.state.user.dashboards[0].widget_dashes
       // this.setState(({user}) => ({
       //   user: {
       //     ...user,
@@ -156,10 +190,14 @@ import {withRouter} from 'react-router-dom'
       //console.log(copyOfWidgets, "copy of widge")
     }
 
+    updateOneCategory = (updatedUserCategory) => {
+      
+    }
+
 
     
 
-    deleteCategory = (deletedUserCategory) => {
+    deleteUserCategory = (deletedUserCategory) => {
      
       // //console.log(deletedUserCategory, "deletedUserCategory")
       // let copyOfdeletedUserCategories = this.state.user.user_category[0].category.filter((CategoryPojo) => {
@@ -222,6 +260,7 @@ import {withRouter} from 'react-router-dom'
           formName="Login"
           user={this.state.user}
           handleSubmit={this.handleLoginSubmit}
+          handleLoginGithub={this.handleLoginGithub}
          
         />
       } else if (routerProps.location.pathname === "/register") {
@@ -229,36 +268,34 @@ import {withRouter} from 'react-router-dom'
         formName="Register To Begin"
         
         handleSubmit={this.handleRegisterSubmit}
+        handleLoginGithub={this.handleLoginGithub}
         />
       }
     }
 
     renderWallet = (routerProps) => {
-      if(this.state.token){
+     // if(this.state.token){
         return <Wallet
         user={this.state.user}
         token={this.state.token}
         clearUser={this.clearUser}
 
         // WalletID={this.state.user.wallet[0].id}
-        // userCategory={this.state.user.wallet[0].Category}
-        // //widgetDash={this.state.user.dashboards[0].widget_dashes}
-        // // Category={this.state.Category}
-        // addOneCategory={this.addOneCategory}
-        // deleteWidget={this.deleteWidget}
+        userCategories={this.state.user.user_categories}
+        addUserCategory={this.addOneCategory}
+        updateOneCategory={this.addOneCategory}
+        deleteUserCategory={this.deleteUserCategory}
 
-        // themeNames={this.state.themeNames}
-        // userThemes={this.state.user.themes}
+        //  themeNames={this.state.themeNames}
+        
         // updateTheme={this.updateTheme}
 
-        // searchTerm={this.state.searchTerm}
-        // changeSearchTerm={this.changeSearchTerm}
-        // results={this.matchedSearch}
         />
          
-      } else {
-        this.props.history.push("/login")
-      }
+      // } 
+      //else {
+      //   this.props.history.push("/login")
+      // }
     }
 
     renderAbout = (routerProps) => {
@@ -266,7 +303,10 @@ import {withRouter} from 'react-router-dom'
     }
 
     renderCategories = (routerProps) => {
-      return <AllCategories />
+      return <AllCategories 
+     
+      categories={this.state.categories} 
+      />
     }
 
     
@@ -286,17 +326,17 @@ import {withRouter} from 'react-router-dom'
         <ThemeProvider theme={{themes: style}} > 
           <GlobalStyle/>
             <div >
+              
               <style>
               @import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap')
               </style>
-            
               <NavBar/>  
               <Switch>
                 <Route path="/" exact component={Home}/>
                 <Route path="/login" render={this.renderForm}/>
                 <Route path="/register" render={this.renderForm}/>
                 <Route path="/wallet" render={this.renderWallet} />
-                {/* <Route path="/categories" render={this.renderCategories} /> */}
+                <Route path="/categories" render={this.renderCategories} />
                 <Route path="/about" render={this.renderAbout} />
               </Switch>
             </div>

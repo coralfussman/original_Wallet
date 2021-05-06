@@ -4,7 +4,10 @@ const app = express();
 const path = require('path');
 require('dotenv').config()
 const cookieSession = require('cookie-session');
+
 const apiRouter = require('./routes/api');
+// const expenseRouter = require('./routes/expense');
+// const user_categoryRouter = require('./routes/user_category');
 const client_id = process.env.GITHUB_CLIENT_ID
 const client_secret = process.env.GITHUB_CLIENT_SECRET
 const cookie_secret = process.env.COOKIE_SECRET
@@ -22,8 +25,21 @@ app.use(
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+// statically serve everything in the build folder on the route '/build'
+if (process.env.NODE_ENV ==='production') {
+  app.use('/build', express.static(path.join(__dirname, '../build')));
+  // serve index.html on the route '/'
+  app.get('/', (req, res) => {
+    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
+  });
+};
 //__defining route handler
 app.use('/api', apiRouter);
+// app.use('/expense', expenseRouter);
+// app.use('/user/category', user_categoryRouter);
+
+
 
 // catch-all route handler for any requests to an unknown route
 //app.use((req, res) => res.status(404).send('This is not the page you\'re looking for...'));
@@ -43,27 +59,35 @@ app.use((err, req, res, next) => {
 
 
 //__________ test routes __________//
+
+// app.get( '/', (req, res) => {
+//   return res.status(200).sendFile(path.resolve(__dirname, '../index.html'));
+// });
+
+
 app.get('/api/', (req, res) => {
   return res.status(200).send("hi");
 });
 
-app.get('/wallet', (req, res) => {
+// app.get('/wallet', (req, res) => {
+//   return res.status(200) //.sendFile(path.resolve(__dirname, '../client/components/Wallet.js'));
+// });
+
+// app.get('/about',  (req, res) => {
+//   return res.status(200).json() //sendFile(path.resolve(__dirname, '../client/components/About.js'));
+// });
+
+app.post('/login', (req, res) => {
   return res.status(200).json();
 });
 
-app.get('/about', (req, res) => {
-  return res.status(200).json();
-});
+// app.get('/register', (req, res) => {
+//   return res.status(200).json();
+// });
 
-app.get('/login', (req, res) => {
-  return res.status(200).json();
-});
-app.get('/register', (req, res) => {
-  return res.status(200).json();
-});
-app.get('/categories', (req, res) => {
-  return res.status(200).json();
-});
+// app.get('/categories', (req, res) => {
+//   return res.status(200).json();
+// });
 
 
 
@@ -107,25 +131,22 @@ app.get('/login/github/callback', async (req, res) => {
   const githubData = await getGithubUser(token)
    //res.json(githubData)
    if(githubData){
+
+     res.locals.githubId = githubData.id
+     res.status(200).send(res.locals.githubId)
      req.session.githubId = githubData.id
      req.session.token = token
+
      res.redirect('/wallet')
      
-   }else{
+   }
+   else{
      res.send('error happened')
      //res.redirect('/login')
    }
 });
 
 
-// statically serve everything in the build folder on the route '/build'
-if (process.env.NODE_ENV ==='production') {
-  app.use('/build', express.static(path.join(__dirname, '../build')));
-  // serve index.html on the route '/'
-  app.get('/', (req, res) => {
-    return res.status(200).sendFile(path.join(__dirname, '../index.html'));
-  });
-};
   
 app.listen(3000); //listens on port 3000 -> http://localhost:3000/
 

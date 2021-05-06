@@ -1,16 +1,16 @@
 const express = require('express');
 
-const userController = require('../userController');
+const mwareController = require('../mwareController');
 
 const router = express.Router();
 
 // router.get('/',
-//   userController.getUser,
+//     mwareController.getUser,
 //   (req, res) => res.status(200).json(res.locals.user)
 // );
 
-// router.get('/category',
-//   userController.getCategory,
+// router.get('/',
+//     mwareController.getCategory,
 //   (req, res) => res.status(200).json(res.locals.categories)
 // );
 
@@ -19,7 +19,9 @@ const router = express.Router();
 //   (req, res) => res.status(200).json(res.locals.user)
 // );
 
-// router.post('/wallet/:user_categoryId',
+
+
+// router.post('/walet/:user_categoryId',
 //   userController.createUserCategory,
 //   (req, res) => res.status(200).json({})
 // );

@@ -1,44 +1,40 @@
 import React, { Component } from 'react'
-//import loader from '../loader.svg';
-
-import {SearchBar} from '../WalletComponents/Themes';
-import {themes} from '../WalletComponents/Themes';
+import PremadeCategory from './PremadeCategory'
 
 
-export default class AllCategories extends Component {
+
+class AllCategories extends Component {
 
 
-    handleType = e => {
-        // console.log(e.target.value)
-         this.props.changeSearchTerm(e.target.key)
-     }
+
+    // addCategory (e){
+
+    //     return 
+    // }
  
     render() {
-        //console.log(this.props.categories, "category")
+        
         
        
-       const allCategories = this.props.categories.map((category) => (
+    //    const allCategories = this.props.allCategories.map((category) => (
              
-            <Category key={category.id} category={category} type={category.expense_state}  onClick={this.handleUpdate} deleteCategory={this.props.deleteCategory}/>
+    //         <PremadeCategory key={category.id} category={category} type={category.expense_state}  onClick={this.handleUpdate} deleteCategory={this.props.deleteCategory}/>
        
-       ))
-       console.log("something")
-      
+    //    ))
+       //console.log("something")
+      this.props.categories = {category}
        return (
-        <div>
-            <SearchBar className="searchBar"
-                    type="text" 
-                    placeholder="Search Headline"
-                    value={this.props.searchTerm}
-                    onChange={this.handleType}
-                    ></SearchBar>
-
-           <div className="newsContainer">
+        <div className="allCatContainer">
+            <h3 className="">Customize Categories by adding them to your Wallet</h3>
+            
+            <PremadeCategory key={this.props.categories.id} category={this.props.categories} onClick={this.addCategory} />
+            <button onClick={() => {console.log(this.props.allCategories, "category")}}>Click ME</button>
+               
+                {/* {allCategories} */}
                 
-                {allCategories}
-            </div>
+          
         </div>
        )
    }
 }
-
+export default AllCategories;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-//import {WidgetDash, NewsContainer} from './DashboardComponents';
+//import {UserCategories, } from './WalletComponents';
 
-//import UserCategories from './UserCategories';
+import UserCategories from './UserCategories';
 
 //import {weather, quotes, currency, calendar} from './DashboardComponents'
 import {Button, SVGPanel, MediaPanel, InvertedFont, ThemePanel, SVG, SignOut} from './Themes';
@@ -23,88 +23,76 @@ import {Button, SVGPanel, MediaPanel, InvertedFont, ThemePanel, SVG, SignOut} fr
 
 class Wallet extends Component {
 
-    state = {}
-     images = 1
-     
+  
 
-       
-   
     
-        onClick = (clickResult) => {
-            console.log( clickResult)
-            
-            const { addedIndex, payload } = clickResult;
-            
-            //console.log( this.props.walletID)
-            //console.log( payload.id)
-   
-
-
-            fetch("http://localhost:4000/user_categories", {
-                method: "POST",
-                headers: {
-                  "content-type": "application/json",
-                  "Authorization": localStorage.token
-                },
-                body: JSON.stringify({
+    // onClick = (clickResult) => {
+    //     console.log( clickResult)
         
-                  widget_id: payload.id,
-                  dashboard_id: this.props.dashboardID
-                 
+    //     const { addedIndex, payload } = clickResult;
         
-                })
-              })
-              .then(r => r.json())
-              .then((newUserCategory) => {
-                  console.log(newUserCategory)
+    //     //console.log( this.props.walletID)
+    //     //console.log( payload.id)
 
-                 this.props.addOneCategory(newUserCategory);
-              })
-             
-            
-            //added index matches widget dash location (send to add widget in state to pass props up)
-            //...... in app........
-            // setstate of userWidgets
-            //go to docs e.addedIndex is prob location dropped on/ e.payload is what you're dropping 
-                    
-          }
-        
-        //   handleThemeChange = (name, id) => {
-        //     console.log(id)
-        //       console.log(this.props.themeName)
-        //       console.log(name)
-        //     //   let name = e.target.value
 
-        //     fetch(`http://localhost:3000/users/${this.props.user.id}`, {
-        //         method: "PATCH",
-        //         headers: {
-        //         "Authorization": localStorage.token,
-        //         "content-type": "application/json"
-        //         },
-        //         body: JSON.stringify({
-        //         new_id: id
+
+    //     fetch("http://localhost:3000/user_categories", {
+    //         method: "POST",
+    //         headers: {
+    //             "content-type": "application/json",
+    //             "Authorization": localStorage.token
+    //         },
+    //         body: JSON.stringify({
+    
+    //             user_id: this.props.user.id,
+    //             category_id: this.props.category.id
                 
-        //         })
-        //     })
-        //     .then(r => r.json())
-        //     .then((updatedTheme) => {
-        //         this.props.updateTheme(updatedTheme)
-        //     })
-        //     }
+    
+    //         })
+    //         })
+    //         .then(r => r.json())
+    //         .then((newUserCategory) => {
+    //             console.log(newUserCategory)
+
+    //             this.props.addOneCategory(newUserCategory);
+    //         })
+            
+        
+    //     //added index matches widget dash location (send to add widget in state to pass props up)
+    //     //...... in app........
+    //     // setstate of userWidgets
+    //     //go to docs e.addedIndex is prob location dropped on/ e.payload is what you're dropping 
+                
+    //     }
+    
+    // //   handleThemeChange = (name, id) => {
+    // //     console.log(id)
+    // //       console.log(this.props.themeName)
+    // //       console.log(name)
+    // //     //   let name = e.target.value
+
+    // //     fetch(`http://localhost:3000/users/${this.props.user.id}`, {
+    // //         method: "PATCH",
+    // //         headers: {
+    // //         "Authorization": localStorage.token,
+    // //         "content-type": "application/json"
+    // //         },
+    // //         body: JSON.stringify({
+    // //         new_id: id
+            
+    // //         })
+    // //     })
+    // //     .then(r => r.json())
+    // //     .then((updatedTheme) => {
+    // //         this.props.updateTheme(updatedTheme)
+    // //     })
+    // //     }
           
        
     render() {
     
-        //console.log(this.props.user)
-        // debugger
-        const themeDots = this.themeNames.map(theme => {
-            
-             return <button className={theme.name} key={theme} value={theme} theme={theme} token={this.props.token} onClick={ ()=> this.handleThemeChange( theme.name, theme.id)} ></button>
-            })
+    
            
-           const { images } = this.state;
-           
-
            const currentHour = new Date().getHours();
 
            const greetingMessage =
@@ -119,58 +107,42 @@ class Wallet extends Component {
           
         return (
         
-            <div className="dashContainer">
+            <div className="walletContainer">
                 {/* column 1 */}
                 <div className="columnContainer">
                     <InvertedFont>
                         <h3> {greetingMessage} {this.props.user.name} </h3>
                     </InvertedFont>
-                    <ThemePanel>
-                            <p>Theme:</p>
-                            {themeDots}
-
-                        </ThemePanel>
-                        <InvertedFont/>
-                        <SVGPanel className="iconPanel">
-                            <h3 className="titleWidgPanel">Customize Categories by adding them to your Wallet</h3>
-                            
-                            {/* <Svgs/> */} 
-                            <Container
-                            groupName="1"
-                            behaviour="copy"
-                            getChildPayload={index => images[index]}
-                            >
-                            {images.map(icon => (
-                            
-                            <SVG src={icon.img} className="widgetIcons" id={icon.id} name={icon.name} alt={icon.name}></SVG>
-                            
-                            ))}
-                            </Container>
-
-                        </SVGPanel>
+                  
 
                 </div>
-
-
-
                 {/* column 2 */}
                 <div className="columnCenterContainer">
-                <Container
-                    dropPlaceholder={false}
-                    shouldAnimateDrop={() => false}
-                    groupName="1"
-                    behaviour="drop-zone"
-                    onClick={this.onClick}
-                    >
-                        <WidgetDash  widgetDash={this.props.widgetDash}  userWidgets={this.props.userWidgets} addOneWidget={this.props.addOneWidget} deleteWidget={this.props.deleteWidget} token={this.props.token}/>
-                   
-                </Container>    
+            
+{/* 
+                <form onSubmit={this.handleSubmit}>
+                <div className="form">
+                <h2>Create Category</h2>
                 
-        
-       
-                    
-                        <NewsContainer searchTerm={this.props.searchTerm} changeSearchTerm={this.props.changeSearchTerm}  themes={this.props.themes} results={this.props.results}/>
-                    
+                <div className="formContent">
+                    <label htmlFor="name">Category Name:</label>
+                    <input className="input" type="text" autoComplete="off" name="name" value={name} onChange={this.handleChange}/><br/>
+                    <label htmlFor="username">Budget:</label>
+                    <input className="input" type="text" autoComplete="off" name="username" value={username} onChange={this.handleChange}/><br/>
+                    <label htmlFor="password">Current Balance:</label>
+                    <input className="input" type="password" autoComplete="off" name="password" value={password} onChange={this.handleChange}/><br/>
+                </div>
+                    <input className="submitButton" type="submit" value="Submit"/>
+                    <h3>Or Authenticate with </h3>
+                    <img src={github} className="" alt="github"  />
+                    <button onClick={this.props.handleLoginGithub}>GITHUB</button>
+                </div>
+                </form> */}
+
+
+                        <UserCategories  onClick={this.onClick} userCategories={this.props.userCategories} addUserCategory={this.props.addUserCategory} deleteUserCategory={this.props.deleteUserCategory} token={this.props.token}/>
+                   
+                      
                 </div>
 
 
@@ -178,23 +150,7 @@ class Wallet extends Component {
                 {/* column 3 */}
                 <div className="columnRightContainer">
                     <SignOut onClick={this.props.clearUser}>Sign Out</SignOut>
-                    <MediaPanel className="iconMediaPanel">
-                        <h3>Social</h3>
-                        <a href="https://www.facebook.com/" >
-                        <img src={facebook} className="widgetMIcons" alt="facebook" />
-                        </a>
-
-                        <a href="https://twitter.com/CoralFussman" >
-                        <img src={twitter} className="widgetMIcons" alt="twitter" />
-                        </a>
-                        <a href="https://www.linkedin.com/in/coral-fussman-21721538/" >
-                        <img src={linkedin} className="widgetMIcons" alt="linkedin" />
-                        </a>
-                        <a href="https://medium.com/@coralfussman" >
-                        <img src={medium} className="widgetMIcons" alt="medium" />
-                        </a>
-
-                    </MediaPanel>
+                   
                 </div>
 
 

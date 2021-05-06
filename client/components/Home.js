@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-// import logo from '../logo.svg';
+import logo from './logo.svg';
+
 
 class Home extends React.Component {
 
@@ -29,9 +30,9 @@ class Home extends React.Component {
         
         <h1> <Link to="/register"> Wallet </Link> </h1>
         <br/>
-        {/* <img src={logo} className="homeLogo" alt="logo" /> */}
+        <svg svg={logo} width="300px" height="250px" frameBorder="0"  />
         <br/>
-        <div onCLick={this.handleClick}> { 
+        <div onClick={this.handleClick}> { 
         this.state.home
         ? <h2>by CORAL</h2>
         : <h4> <Link  to="/register"> Click to register </Link> </h4>
